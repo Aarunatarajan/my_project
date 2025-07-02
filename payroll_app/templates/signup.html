@@ -1,0 +1,273 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sign Up</title>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet" />
+  <link rel="icon" href="{% static 'images/favicon.png' %}" type="image/png">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0; padding: 0;
+    }
+
+    body {
+      font-family: 'Outfit', sans-serif;
+      min-height: 100vh;
+      background-color: #1a252f;
+      color: #333;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 0 15px 60px;
+      overflow-x: hidden;
+    }
+
+    body::before, body::after {
+      content: "";
+      position: fixed;
+      border-radius: 40% 60% 70% 30% / 60% 30% 70% 40%;
+      opacity: 0.2;
+      filter: blur(120px);
+      z-index: -2;
+    }
+
+    body::before {
+      width: 350px; height: 350px;
+      background: #a076f9;
+      top: -80px; left: -80px;
+      transform: rotate(45deg);
+    }
+
+    body::after {
+      width: 450px; height: 450px;
+      background: #fcb045;
+      bottom: -130px; right: -130px;
+      transform: rotate(-45deg);
+    }
+
+    header {
+      text-align: center;
+      padding: 25px 0;
+      background: rgba(255, 255, 255, 0.15);
+      width: 100%;
+      max-width: 950px;
+      border-radius: 15px;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+      color: white;
+      font-weight: 700;
+      font-size: 2rem;
+      margin-top: 25px;
+      backdrop-filter: saturate(180%) blur(15px);
+    }
+
+    .header-content {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+    }
+
+    .header-logo {
+      width: 50px;
+      height: 50px;
+      object-fit: contain;
+      border-radius:10px;
+    }
+
+    .signup-container {
+      max-width: 950px;
+      background: rgba(255, 255, 255, 0.75);
+      margin: 40px auto 0;
+      padding: 40px;
+      border-radius: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+      backdrop-filter: saturate(180%) blur(25px);
+    }
+
+    form {
+      flex: 1;
+      min-width: 280px;
+    }
+
+    .form-group {
+      position: relative;
+      margin-bottom: 35px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 1rem;
+      color: #333;
+      font-weight: 600;
+    }
+
+    .form-group input,
+    .form-group select {
+      width: 100%;
+      padding: 14px 12px;
+      border: 1px solid #ccc;
+      border-radius: 12px;
+      background-color: #fff;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.07);
+      outline-offset: 4px;
+    }
+
+    .form-group input:focus,
+    .form-group select:focus {
+      border-color: #a076f9;
+      box-shadow: 0 0 8px 3px rgba(160, 118, 249, 0.35);
+      outline: none;
+    }
+
+    .field-error {
+      color: #b00020;
+      font-weight: 600;
+      margin-top: 6px;
+      font-size: 0.9rem;
+      text-shadow: 0 0 5px #b0002044;
+    }
+
+    button[type="submit"] {
+      background: linear-gradient(to right, #a076f9, #fcb045);
+      color: white;
+      font-weight: 700;
+      border: none;
+      padding: 14px 28px;
+      border-radius: 15px;
+      cursor: pointer;
+      font-size: 1.1rem;
+      margin-top: 10px;
+      transition: all 0.4s ease;
+      box-shadow: 0 6px 18px rgba(252, 176, 69, 0.35);
+    }
+
+    button[type="submit"]:hover {
+      box-shadow: 0 10px 30px rgba(252, 176, 69, 0.6);
+      transform: translateY(-3px) scale(1.05);
+    }
+
+    .image {
+      max-width: 380px;
+      width: 100%;
+      border-radius: 25px;
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.12);
+      object-fit: cover;
+      user-select: none;
+    }
+
+    .errorlist {
+      background: #ffd6d6;
+      padding: 10px 15px;
+      border-radius: 12px;
+      list-style-type: none;
+      margin-bottom: 15px;
+      color: #b00020;
+      font-weight: 600;
+      box-shadow: 0 0 8px #b0002044;
+    }
+
+    .login-link,
+    .quote {
+      text-align: center;
+      margin-top: 22px;
+      font-size: 0.95rem;
+      color: #fefefe;
+      text-shadow: 0 0 4px rgba(0,0,0,0.35);
+    }
+
+    .login-link a {
+      color: #a076f9;
+      font-weight: 700;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .login-link a:hover {
+      color: #fcb045;
+      text-decoration: underline;
+    }
+
+    .quote {
+      font-style: italic;
+      opacity: 0.9;
+      font-weight: 600;
+    }
+
+    @media (max-width: 768px) {
+      .signup-container {
+        flex-direction: column;
+        padding: 30px 25px;
+      }
+      .image {
+        margin-top: 25px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .image {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <div class="header-content">
+    <h1>Payroll System</h1>
+    <img src="{% static 'images/payroll.png' %}" alt="Payroll System Logo" class="header-logo">
+  </div>
+</header>
+
+<section class="signup-container">
+  <form method="post" autocomplete="off" novalidate>
+    {% csrf_token %}
+
+    {% if form.non_field_errors %}
+      <ul class="errorlist">
+        {% for error in form.non_field_errors %}
+          <li>{{ error }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+
+    {% for field in form %}
+      <div class="form-group">
+        <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+        {{ field }}
+        {% if field.errors %}
+          <div class="field-error">
+            {% for error in field.errors %}
+              {{ error }}<br />
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+    {% endfor %}
+
+    <button type="submit">Register</button>
+  </form>
+
+  <img src="{% static 'images/wage.png' %}"class="image" />
+</section>
+
+<div class="login-link">
+ 
+</div>
+
+<div class="quote">
+  <p>"Create your future one click at a time."</p>
+</div>
+
+</body>
+</html>

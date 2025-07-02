@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>{{ user.role|capfirst }} Dashboard</title>
+  <style>
+  
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      margin: 0;
+      padding: 20px;
+      color: #333;
+    }
+    .dashboard-container {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 20px;
+      border-radius: 8px;
+      position: relative;
+      box-sizing: border-box;
+    }
+    h1, h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    button, .btn {
+      padding: 10px 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: bold;
+      text-decoration: none;
+      display: inline-block;
+      margin-top: 10px;
+      color: #fff;
+      transition: background-color 0.3s;
+    }
+    button:hover, .btn:hover {
+      filter: brightness(90%);
+    }
+    .logout-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      padding: 10px 16px;
+      border-radius: 6px;
+      font-weight: bold;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background-color 0.3s;
+      color: #fff;
+    }
+    .logout-btn:hover {
+      filter: brightness(85%);
+    }
+    @media (max-width: 768px) {
+      .box-container {
+        flex-direction: column;
+      }
+      .box {
+        flex: 1 1 100%;
+      }
+    }
+
+.employee-dashboard {
+  background-color: #f8f9fa;
+  color: #333;
+}
+.employee-dashboard h2 {
+  color: #203a43;
+}
+.employee-dashboard .btn {
+  background-color:rgb(2, 28, 56); 
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-weight: bold;
+  text-decoration: none;
+  display: inline-block;
+  transition: background-color 0.3s;
+}
+.employee-dashboard .btn:hover {
+  background-color: #0056b3; 
+}
+.employee-dashboard .box-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: space-around;
+  margin-bottom: 40px;
+}
+.employee-dashboard .box {
+  background-color: rgb(177, 208, 240);
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+  flex: 1 1 20%;
+  min-width: 180px;
+  box-sizing: border-box;
+}
+.employee-dashboard .box:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(76, 175, 80, 0.25);
+  border-color: #4CAF50;
+}
+.employee-dashboard .box-office {
+  background-color: #e8f4fd;
+}
+.employee-dashboard button {
+  background-color: #4CAF50;
+}
+.employee-dashboard button:hover {
+  background-color: #45a049;
+}
+.employee-dashboard .logout-btn {
+  background-color: #e74c3c;
+}
+.employee-dashboard .logout-btn:hover {
+  background-color: #c0392b;
+}
+
+
+
+    .admin-dashboard {
+      background-color: #222831;
+      color: #eeeeee;
+    }
+    .admin-dashboard h1 {
+      color: #00adb5;
+    }
+    .admin-dashboard .box-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: space-around;
+      margin-bottom: 40px;
+    }
+    .admin-dashboard .box {
+      background-color: #393e46;
+      border: 1px solid #00adb5;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(0, 173, 181, 0.3);
+      transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+      flex: 1 1 20%;
+      min-width: 180px;
+      box-sizing: border-box;
+      color: #eeeeee;
+    }
+    .admin-dashboard .box:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 8px 24px rgba(0, 173, 181, 0.5);
+      border-color: #00adb5;
+    }
+    .admin-dashboard .box-office {
+      background-color: #222831;
+    }
+    .admin-dashboard button {
+      background-color: #00adb5;
+      color: #222831;
+    }
+    .admin-dashboard button:hover {
+      background-color: #009ca6;
+      color:rgb(10, 10, 10);
+    }
+    .admin-dashboard .btn {
+      background-color: #00adb5;
+      color: #222831;
+    }
+    .admin-dashboard .btn:hover {
+      background-color: #009ca6;
+      color:rgb(26, 25, 25);
+    }
+    .admin-dashboard .logout-btn {
+      background-color: #ff5722;
+      color: #222831;
+    }
+    .admin-dashboard .logout-btn:hover {
+      background-color: #e64a19;
+      color: #fff;
+    }
+    .alert {
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  font-weight: bold;
+}
+
+.alert.success {
+  background-color: #d4edda;
+  color: #155724;
+  border-left: 5px solid #28a745;
+}
+
+.alert.warning {
+  background-color: #fff3cd;
+  color: #856404;
+  border-left: 5px solid #ffc107;
+}
+
+.alert.error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border-left: 5px solid #dc3545;
+}
+
+  </style>
+</head>
+<body>
+  <div class="dashboard-container {% if user.role == 'employee' %}employee-dashboard{% elif user.role == 'admin' %}admin-dashboard{% endif %}">
+    <a href="{% url 'logout' %}" class="logout-btn">Logout</a>
+
+    {% if user.role == 'employee' %}
+      <h2>Welcome, {{ user_name }}</h2>
+      <h2>Dashboard</h2>
+      <div class="box-container">
+        <div class="box"><p><strong>Role:</strong> {{ Role }}</p></div>
+        <div class="box"><p><strong>Month:</strong> {{ today_month }}/{{ total_year }}</p></div>
+        <div class="box"><p><strong>Total working days:</strong> {{ total_days }}</p></div>
+        <div class="box"><p><strong>Till now working days:</strong> {{ tillnow_working_days }}</p></div>
+        <div class="box"><p><strong>Upcoming working days:</strong> {{ upcoming_working_days }}</p></div>
+        <div class="box"><p><strong>Present days:</strong> {{ present_days }}</p></div>
+        <div class="box"><p><strong>Absent days:</strong> {{ absent_days }}</p></div>
+      </div>
+
+      <h2>{{ user_name }} – Salary History</h2>
+      <form method="post">
+        {% csrf_token %}
+        <input type="hidden" name="emp_id" value="{{ emp_id }}">
+        {% if salaries %}
+          <button type="submit" name="action" value="hide">Close</button>
+        {% else %}
+          <button type="submit" name="action" value="show">Show Salary History</button>
+        {% endif %}
+      </form>
+
+      {% if salaries %}
+        <div class="box-container">
+          {% for s in salaries %}
+            <div class="box box-office">
+              <p><strong>Month:</strong> {{ s.month }}</p>
+              <p><strong>Year:</strong> {{ s.year }}</p>
+              <p><strong>Present Days:</strong> {{ s.present_days }}</p>
+              <p><strong>Absent Days:</strong> {{ s.absent_days }}</p>
+
+              <p><strong>Salary:</strong> ₹{{ s.salary_amount }}</p>
+              <p><strong>Generated On:</strong> {{ s.generated_on }}</p>
+              <p><a class="btn" href="{% url 'download_payslip' s.id %}">Download Payslip</a></p>
+            </div>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% elif user.role == 'admin' %}
+
+      <h1>{{ Role }} Dashboard</h1>
+                  {% if messages %}
+  <div class="message-container">
+    {% for message in messages %}
+      <div class="alert {{ message.tags }}">
+        {{ message }}
+      </div>
+    {% endfor %}
+  </div>
+{% endif %}
+      <p><a class="btn" href="{% url 'signup' %}">Add Employee</a></p>
+
+      <div class="box-container">
+        {% for i in employees %}
+          <div class="box box-office">
+            <p><strong>Employee ID:</strong> {{ i.emp_id }}</p>
+            <p><strong>Name:</strong> {{ i.emp_name }}</p>
+            <p><strong>Present Days:</strong> {{ i.present_days }}</p>
+            <p><strong>Absent Days:</strong> {{ i.absent_days }}</p>
+            {% if i.salary_status %}
+              <p><strong>Salary Amount:</strong> ₹{{ i.salary_amount }}</p>
+            {% endif %}
+            <form method="post" action="{% url 'generate_salary' %}" onsubmit="return confirm('Generate salary for {{ i.emp_name }}?');">
+              {% csrf_token %}
+              <input type="hidden" name="emp_id" value="{{ i.emp_id }}">
+              <input type="hidden" name="emp_name" value="{{ i.emp_name }}">
+              <input type="hidden" name="present_days" value="{{ i.present_days }}">
+              <input type="hidden" name="absent_days" value="{{ i.absent_days }}">
+              <button type="submit">Generate Salary</button>
+            </form>
+
+
+            <form method="post" action="{% url 'delete_employee' i.emp_id %}" onsubmit="return confirm('Delete employee {{ i.emp_name }}?');">
+              {% csrf_token %}
+              <button type="submit">Delete Details</button>
+            </form>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</body>
+</html>

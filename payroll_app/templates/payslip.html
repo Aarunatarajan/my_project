@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head><title>Payslip</title></head>
+<body>
+    <h1>EMPLOYEE PAYSLIP<h1>
+<h2>Payslip - {{ salary.month }}/{{ salary.year }}</h2>
+<p><strong>Employee:</strong> {{ salary.employee_name }}</p>
+<p><strong>Department:</strong> {{ salary.user.department.name }}</p>
+<p><strong>Present Days:</strong> {{ salary.present_days }}</p>
+<p><strong>Absent Days:</strong> {{ salary.absent_days }}</p>
+<p><strong>Amount:</strong> Rs.{{ salary.salary_amount }}</p>
+<p><strong>Generated On:</strong> {{ salary.generated_on }}</p>
+</body>
+</html>
